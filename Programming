@@ -1,0 +1,46 @@
+module One where
+
+import Data.List
+
+null' x
+  | x == [] = True
+  |otherwise = False
+
+take' _ [] = []
+take' 0 (x:xs) = []
+take' n (x:xs) = x : take' (n-1) xs
+
+drop' _ [] = []
+drop' 0 xs = xs
+drop' n (x:xs) = drop' (n-1) xs
+
+fst' (a,b) = a
+
+snd' (a,b) = b
+
+--map
+
+--filter
+
+--delete' a (x:xs)
+-- | x /= a = [x] ++ delete' xs
+-- | x == a = xs
+
+
+--deleteAll'
+
+tail' (x:xs) = xs
+
+max' a b
+ | a >= b = a
+ |otherwise = b
+
+min' a b
+ | a <= b = a
+ |otherwise = b
+
+last' [a] = a
+last' (x:xs) = last' xs
+
+init' [a] = []
+init' (x:xs) = x : init' xs
