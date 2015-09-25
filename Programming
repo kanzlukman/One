@@ -2,6 +2,11 @@ module One where
 
 import Data.List
 
+koko = [1,2,3,4,5]
+oke = [True,False]
+
+--32/58 Finish
+
 null' x
   | x == [] = True
   |otherwise = False
@@ -11,25 +16,74 @@ take' 0 (x:xs) = []
 take' n (x:xs) = x : take' (n-1) xs
 
 drop' _ [] = []
-drop' 0 xs = xs
+drop' 0 (x:xs) = (x:xs)
 drop' n (x:xs) = drop' (n-1) xs
 
 fst' (a,b) = a
 
 snd' (a,b) = b
 
---map
+map' f [] = []
+map' f (x:xs) = [f x] ++ map' f xs
 
---filter
+filter' f [] = []
+filter' f (x:xs)
+ | f x == True = [x] ++ filter' f xs
+ | f x == False = filter' f xs
 
---delete' a (x:xs)
--- | x /= a = [x] ++ delete' xs
--- | x == a = xs
+delete' a (x:xs)
+ | a == x = xs
+ | a /= x = x : delete' a (xs)
+ | a /= x = (x:xs)
 
+deleteAll' _ [] = []
+deleteAll' n (x:xs)
+ | n == x = deleteAll' n xs
+ | n /= x = [x] ++ deleteAll' n xs
 
---deleteAll'
+zip' [] (y:ys) = []
+zip' (x:xs) [] = []
+zip' (x:xs) (y:ys) = [(x,y)] ++ zip' xs ys
+
+--foldl
+
+--fold
+
+zipWith' f (x:xs) [] = []
+zipWith' f [] (y:ys) = []
+zipWith' f (x:xs) (y:ys) = [f x y] ++ zipWith' f xs ys
+
+--nth
+
+--scanl
+
+--scanl1
+
+elem' _ [] = False
+elem' f (x:xs)
+ | f == x = True
+ | f /= x = elem' f xs
+
+notElem' _ [] = True
+notElem' f (x:xs)
+ | f == x = False
+ | f /= x = notElem' f xs
+
+head' (x:xs) = x
+
+length' [] = 0
+length' (x:xs) = 1 + length' xs
+
+reverse' [] = []
+reverse' (x:xs) = reverse' xs ++ [x]
+
+last' [a] = a
+last' (x:xs) = last' xs
 
 tail' (x:xs) = xs
+
+init' [a] = []
+init' (x:xs) = x : init' xs
 
 max' a b
  | a >= b = a
@@ -39,8 +93,75 @@ min' a b
  | a <= b = a
  |otherwise = b
 
-last' [a] = a
-last' (x:xs) = last' xs
+concat' [(x:xs)] = (x:xs)
+concat' [x] = x
 
-init' [a] = []
-init' (x:xs) = x : init' xs
+intersperse' n [] = []
+intersperse' n (x:xs) = [x,n] ++ intersperse' n xs
+-- in 5 [1,2,3]
+-- in ([1] + [5]) [2,3]
+-- [1.5] ln
+
+intercalate' (x:xs) [(y:ys)] = (y:ys)
+
+and' [] = True
+and' (x:xs)
+ |x == False = False
+ |x == True = and' xs
+
+or' [] = False
+or' (x:xs)
+ |x == True = True
+ |x == False = or' xs
+
+zip3' (x:xs) (y:ys) [] = []
+zip3' (x:xs) [] (z:zs) = []
+zip3' [] (y:ys) (z:zs) = []
+zip3' (x:xs) (y:ys) (z:zs) = [(x,y,z)] ++ zip3' xs ys zs
+
+sum' [] = 0
+sum' (x:xs) = x + sum' xs
+
+product' [] = 1
+product' (x:xs) = x * product' xs
+
+lines' (string) = [string]
+
+--unlines
+
+unwords' [string] = string
+
+--dropWhile
+
+--concatMap
+
+--all'
+
+--any
+
+insert' f [] = [f]
+insert' f (x:xs)
+ | f /= x = [x] ++ insert' f xs
+ | f == x = [x,f] ++ xs
+
+--nub' [] = []
+--nub' ((x:xs),(x;xs),) = [x] ++ nub' xs
+
+--sort' [] = []
+--sort' (x:xs)
+-- | x <= sort' xs =
+
+
+--minimum' (x:xs)
+-- | x <= minimum' xs == x
+-- | x >= minimum' xs = xs
+
+--maximum'
+
+--inits' (x:xs) = [[],[x]] ++ [[x] ++ inits' xs]
+
+--tails' (x:xs) =
+
+--union' (x:xs) [] = (x:xs)
+--union' [] (y:ys) = (y:ys)
+--union' (x:xs) (y:ys)
